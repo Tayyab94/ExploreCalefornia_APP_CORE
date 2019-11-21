@@ -1,0 +1,40 @@
+﻿
+@model IEnumerable<ExploreCalefornia.Models.Post>
+
+<h2>Explore Blog Section <a href="@Url.Action("Create","Blog")">Create New</a></h2>
+
+<p>Below are the few latest blog that are posted into your website...</p>
+<p class="pager">
+    @if (ViewBag.HaspreviousPage)
+    {
+        <a class="prev" href="@Url.Action("Index","Blog", new { page=ViewBag.previousPage})">&lt; Pre</a>
+    }
+
+
+    @if (ViewBag.HasnextPage)
+    {
+        <a class="prev" href="@Url.Action("Index","Blog", new { page=ViewBag.nextPage})">Next &gt;</a>
+    }
+</p>
+
+
+<div class="blog-posts">
+ @foreach (var item in Model)
+ {
+
+
+     @await Html.PartialAsync("_PostBlog",item)
+
+    @*<article class="blog-post">
+        <h2>
+            @Html.ActionLink(item.Title, "PostBlog", "Blog", new { year = item.PostedDate.Year, month = item.PostedDate.Month, key = item.Key })
+        </h2>
+        <div class="details">
+            Posted <span>@item.PostedDate</span> by <span>@item.Auther</span>
+        </div>
+        <div class="content">
+            @item.Body
+        </div>
+    </article>*@
+ }
+</div>
